@@ -1,1 +1,1 @@
-# matching-game
+A game of memory where you need to match cards.
