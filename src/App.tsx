@@ -1,35 +1,70 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import styled from 'styled-components'
 
 function App() {
-  const [count, setCount] = useState(0)
+
+  const numCards = 6; //make way to set later
+
+  const [cols, rows] = calculateCols(numCards);
+
+  const Board = styled.div `
+  position: relative;
+  margin: 0 auto;
+  height: 50vh;
+  width: 50vh;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  justify-content: space-evenly;
+  `;
+
+  const Card = styled.div `
+  max-height: ${100/rows}%;
+  max-width: ${100/cols}%
+  `;
+
+  const CardImage = styled.img `
+  max-height: 100%;
+  object-fit: contain;
+  `;
 
   return (
     <>
       <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+        <h1>Memory Match!</h1>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+
+      <Board>
+        <Card>
+          <CardImage src="/card back red.png"/>
+        </Card>
+        <Card>
+          <CardImage src="/card back red.png"/>
+        </Card>
+        <Card>
+          <CardImage src="/card back red.png"/>
+        </Card>
+        <Card>
+          <CardImage src="/card back red.png"/>
+        </Card>
+        <Card>
+          <CardImage src="/card back red.png"/>
+        </Card>
+        <Card>
+          <CardImage src="/card back red.png"/>
+        </Card>
+      </Board>
     </>
   )
+}
+
+function calculateCols(num: number) {
+  let c=Math.ceil(Math.sqrt(num));
+  while(num%c !== 0) {
+    c--;
+  }
+  return  [c, num/c];
 }
 
 export default App
