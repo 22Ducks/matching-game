@@ -20,6 +20,7 @@ function App() {
   )
 }
 
+// TODO: extract to its own file
 function calculateCols(num: number) {
   let c=Math.ceil(Math.sqrt(num));
   while(num%c !== 0) {

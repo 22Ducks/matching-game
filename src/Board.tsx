@@ -37,8 +37,8 @@ export const Board = ({numCards, rows, cols}: Props) => {
     return (
         <Board>
             {
-                cardArray.map(() => 
-                    <Card>
+                cardArray.map((card) => 
+                    <Card key={card}>
                         <CardImage src="/card back red.png"/>
                     </Card>
                 )
