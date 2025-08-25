@@ -2,12 +2,13 @@ import { useState } from 'react'
 import './App.css'
 import styled from 'styled-components'
 import {Board} from './Board.tsx'
+import { CalculateCols } from './CalculateCols.tsx';
 
 function App() {
 
-  const numCards = 24; //make way to set later
+  const numCards = 16; //make way to set later
 
-  const [cols, rows] = calculateCols(numCards);
+  const [cols, rows] = CalculateCols(numCards);
 
   return (
     <>
@@ -21,12 +22,5 @@ function App() {
 }
 
 // TODO: extract to its own file
-function calculateCols(num: number) {
-  let c=Math.ceil(Math.sqrt(num));
-  while(num%c !== 0) {
-    c--;
-  }
-  return  Math.max(c, num/c) === c ? [c, num/c] : [num/c, c];
-}
 
 export default App

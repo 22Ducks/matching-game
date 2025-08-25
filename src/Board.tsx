@@ -1,4 +1,6 @@
 import styled from 'styled-components'
+import { Card } from './Card';
+import { GenerateCards } from './GenerateCards';
 
 type Props = {
     numCards: number;
@@ -16,31 +18,24 @@ export const Board = ({numCards, rows, cols}: Props) => {
     flex-wrap: wrap;
     align-content: flex-start;
     justify-content: space-evenly;
+    row-gap: 10px;
     `;
 
-    const Card = styled.div `
-    max-height: ${100/rows}%;
-    max-width: ${100/cols}%
-    `;
+    const cardImages = GenerateCards(numCards/2);
 
-    const CardImage = styled.img `
-    max-height: 100%;
-    object-fit: contain;
-    `;
-
+    const flippedArray: boolean[] = [];
     const cardArray: string[] = [];
 
     for (let i=0; i<numCards; i++) {
-        cardArray.push("card" + i.toString());
+        flippedArray.push(true);
+        cardArray.push(cardImages[i]);
     }
 
     return (
         <Board>
             {
-                cardArray.map((card) => 
-                    <Card key={card}>
-                        <CardImage src="/card back red.png"/>
-                    </Card>
+                cardArray.map((card, index) => 
+                    <Card rows={rows} cols={cols} flipped={flippedArray[index]} card={card} key={index}/>
                 )
             }
         </Board>
