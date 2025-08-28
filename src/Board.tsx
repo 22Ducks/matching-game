@@ -27,9 +27,18 @@ const BoardContainer = styled.div<BoardContainerProps> `
 
 export const Board = ({numCards, rows, cols}: Props) => {
     const [flippedArray, setFlippedArray] = useState<boolean[]>(new Array(numCards).fill(false));
-    const [cardArray, setCardArray] = useState<string[]>(GenerateCards(numCards/2));
+    const [cardArray] = useState<string[]>(GenerateCards(numCards/2));
 
     const currentPair = useRef([-1, -1]);
+    const timeoutId = useRef<number>(undefined);
+
+    useEffect(() => {
+        return () => {
+            if(timeoutId.current !== undefined) {
+                clearTimeout(timeoutId.current);
+            }
+        }
+    }, []);
     
     const flipHandler = (idx: number) => {
         if((currentPair.current[1] < 0) && flippedArray[idx] === false) {
@@ -45,14 +54,14 @@ export const Board = ({numCards, rows, cols}: Props) => {
                 currentPair.current = [-1, -1];
                 return;
             }
-            setTimeout(() => {
+            timeoutId.current = setTimeout(() => {
                 const newArray = [...flippedArray];
                 newArray[currentPair.current[0]] = false;
                 newArray[currentPair.current[1]] = false;
                 setFlippedArray(newArray);
 
                 currentPair.current = [-1, -1];
-            }, 2000);
+            }, 1000);
         }
     }
 
