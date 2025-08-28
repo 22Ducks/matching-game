@@ -1,6 +1,4 @@
-import { useState } from 'react'
 import './App.css'
-import styled from 'styled-components'
 import {Board} from './Board.tsx'
 import { CalculateCols } from './CalculateCols.tsx';
 
@@ -20,7 +18,5 @@ function App() {
     </>
   )
 }
-
-// TODO: extract to its own file
 
 export default App

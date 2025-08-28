@@ -5,25 +5,29 @@ type Props = {
     cols: number;
     flipped: boolean;
     card: string;
-    key: number;
+    flipCard: () => void;
 };
 
-export const Card = ({rows, cols, flipped, card, key}: Props) => {
-    const back = "/card back red.png";
-    
-    const Card = styled.div `
-    max-height: ${100/rows}%;
-    max-width: ${100/cols}%
-    `;
+type CardDivProps = {
+    rows: number;
+    cols: number;
+}
 
-    const CardImage = styled.img `
+const CardDiv = styled.div<CardDivProps>`
+    max-height: ${({rows}) => 100/rows}%;
+    max-width: ${({cols}) => 100/cols}%
+`;
+
+const CardImage = styled.img `
     max-height: 100%;
     object-fit: contain;
-    `;
+`;
 
+export const Card = ({rows, cols, flipped, card, flipCard}: Props) => {
+    const back = "/card back red.png";
     return (
-        <Card key={key}>
+        <CardDiv rows={rows} cols={cols} onClick={flipCard}>
             <CardImage src={flipped ? card : back}/>
-        </Card>
+        </CardDiv>
     );
 }
