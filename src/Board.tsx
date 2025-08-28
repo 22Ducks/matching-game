@@ -56,8 +56,6 @@ export const Board = ({numCards, rows, cols}: Props) => {
         }
     }
 
-    console.log(flippedArray);
-
     return (
         <BoardContainer cols={cols}>
             {
