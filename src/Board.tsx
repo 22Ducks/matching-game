@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import { Card } from './Card';
 import { GenerateCards } from './GenerateCards';
 import { useEffect, useRef, useState } from 'react';
+import { VictoryModal } from './VictoryModal';
 
 type Props = {
     numCards: number;
@@ -27,7 +28,7 @@ const BoardContainer = styled.div<BoardContainerProps> `
 
 export const Board = ({numCards, rows, cols}: Props) => {
     const [flippedArray, setFlippedArray] = useState<boolean[]>(new Array(numCards).fill(false));
-    const [cardArray] = useState<string[]>(GenerateCards(numCards/2));
+    const [cardArray, setCardArray] = useState<string[]>(GenerateCards(numCards/2));
 
     const currentPair = useRef([-1, -1]);
     const timeoutId = useRef<number>(undefined);
@@ -39,6 +40,11 @@ export const Board = ({numCards, rows, cols}: Props) => {
             }
         }
     }, []);
+
+    const reset = () => {
+        setCardArray(GenerateCards(numCards/2));
+        setFlippedArray(new Array(numCards).fill(false));
+    }
     
     const flipHandler = (idx: number) => {
         if((currentPair.current[1] < 0) && flippedArray[idx] === false) {
@@ -66,12 +72,15 @@ export const Board = ({numCards, rows, cols}: Props) => {
     }
 
     return (
-        <BoardContainer cols={cols}>
-            {
-                cardArray.map((card, index) => 
-                    <Card key={index} rows={rows} cols={cols} flipped={flippedArray[index]} card={card} flipCard={() => flipHandler(index)}/>
-                )
-            }
-        </BoardContainer>
+        <>
+            <VictoryModal open={flippedArray.every((value) => value)} reset={reset}/>
+            <BoardContainer cols={cols}>
+                {
+                    cardArray.map((card, index) => 
+                        <Card key={index} rows={rows} cols={cols} flipped={flippedArray[index]} card={card} flipCard={() => flipHandler(index)}/>
+                    )
+                }
+            </BoardContainer>
+        </>
     );
 }
