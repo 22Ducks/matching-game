@@ -1,6 +1,7 @@
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
+import { useNavigate } from 'react-router-dom';
 import { styled } from 'styled-components';
 
 type Props = {
@@ -28,6 +29,11 @@ const ModalContent = styled.div `
 `;
 
 export const VictoryModal = ({open, reset}: Props) => {
+    const navigate = useNavigate();
+
+    const handleRedirect = () => {
+        navigate("/");
+    };
 
     return (
         <Modal open={open}>
@@ -35,6 +41,7 @@ export const VictoryModal = ({open, reset}: Props) => {
                 <ModalContent>
                     <h2>VICTORY!</h2>
                     <Button onClick={reset}>Play Again?</Button>
+                    <Button onClick={handleRedirect}>Home</Button>
                 </ModalContent>
             </Box>
         </Modal>

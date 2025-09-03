@@ -1,8 +1,10 @@
 import styled from 'styled-components'
 import { Card } from './Card';
 import { GenerateCards } from './GenerateCards';
-import { useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { VictoryModal } from './VictoryModal';
+import { TimeContext } from './App';
+
 
 type Props = {
     numCards: number;
@@ -33,6 +35,8 @@ export const Board = ({numCards, rows, cols}: Props) => {
     const currentPair = useRef([-1, -1]);
     const timeoutId = useRef<number>(undefined);
 
+    const {setTimerVal, setTimerState} = useContext(TimeContext);
+
     useEffect(() => {
         return () => {
             if(timeoutId.current !== undefined) {
@@ -44,6 +48,8 @@ export const Board = ({numCards, rows, cols}: Props) => {
     const reset = () => {
         setCardArray(GenerateCards(numCards/2));
         setFlippedArray(new Array(numCards).fill(false));
+        setTimerVal(0);
+        setTimerState(true);
     }
     
     const flipHandler = (idx: number) => {
@@ -57,14 +63,20 @@ export const Board = ({numCards, rows, cols}: Props) => {
             }
             currentPair.current[1] = idx;
             if(cardArray[currentPair.current[0]] === cardArray[currentPair.current[1]]) {
+                console.log({currentPair});
                 currentPair.current = [-1, -1];
+                if(flippedArray.every((value) => value)) {
+                    setTimerState(false);
+                }
                 return;
             }
             timeoutId.current = setTimeout(() => {
-                const newArray = [...flippedArray];
-                newArray[currentPair.current[0]] = false;
-                newArray[currentPair.current[1]] = false;
-                setFlippedArray(newArray);
+                setFlippedArray(currArray => {
+                    const newArray = [...currArray];
+                    newArray[currentPair.current[0]] = false;
+                    newArray[currentPair.current[1]] = false;
+                    return newArray;
+                });
 
                 currentPair.current = [-1, -1];
             }, 1000);
