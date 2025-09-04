@@ -1,7 +1,7 @@
 export const GenerateCards = (sets: number) => {
     const cardArray: string[] = [];
 
-    const set = "colorSet"; //add way to change later
+    const set = "/colorSet"; //add way to change later
 
     for(let i=1; i<=sets; i++) {
         cardArray.push(set + "/card" + i.toString() + ".png");

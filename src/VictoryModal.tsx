@@ -28,7 +28,7 @@ const ModalContent = styled.div `
     align-items: center;
 `;
 
-export const VictoryModal = ({open, reset}: Props) => {
+export const VictoryModal = ({open, reset}: Props) => {    
     const navigate = useNavigate();
 
     const handleRedirect = () => {

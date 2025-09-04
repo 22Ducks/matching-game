@@ -3,7 +3,7 @@ import { Card } from './Card';
 import { GenerateCards } from './GenerateCards';
 import { useContext, useEffect, useRef, useState } from 'react';
 import { VictoryModal } from './VictoryModal';
-import { TimeContext } from './App';
+import { TimeContext } from './Game';
 
 
 type Props = {
@@ -45,6 +45,12 @@ export const Board = ({numCards, rows, cols}: Props) => {
         }
     }, []);
 
+    useEffect(() => {
+        if(flippedArray.every((value) => value)) {
+            setTimerState(false);
+        }
+    }, [flippedArray])
+
     const reset = () => {
         setCardArray(GenerateCards(numCards/2));
         setFlippedArray(new Array(numCards).fill(false));
@@ -63,18 +69,15 @@ export const Board = ({numCards, rows, cols}: Props) => {
             }
             currentPair.current[1] = idx;
             if(cardArray[currentPair.current[0]] === cardArray[currentPair.current[1]]) {
-                console.log({currentPair});
                 currentPair.current = [-1, -1];
-                if(flippedArray.every((value) => value)) {
-                    setTimerState(false);
-                }
                 return;
             }
             timeoutId.current = setTimeout(() => {
+                const captureCurrent = currentPair.current;
                 setFlippedArray(currArray => {
                     const newArray = [...currArray];
-                    newArray[currentPair.current[0]] = false;
-                    newArray[currentPair.current[1]] = false;
+                    newArray[captureCurrent[0]] = false;
+                    newArray[captureCurrent[1]] = false;
                     return newArray;
                 });
 
