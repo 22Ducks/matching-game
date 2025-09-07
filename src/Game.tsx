@@ -5,7 +5,6 @@ import { Board } from "./Board";
 import { styled } from "styled-components";
 
 type GameProps = {
-    numCards: number;
     rows: number;
     cols: number;
 };
@@ -30,7 +29,7 @@ const TimerStyle = styled.h4 `
   margin-bottom: 5px;
 `;
 
-export function Game({ rows, cols}: GameProps) {
+export function Game({ rows, cols }: GameProps) {
   const [timer, setTimerVal] = useState(0);
   const [timerState, setTimerState] = useState(true);
 

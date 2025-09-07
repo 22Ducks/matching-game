@@ -12,15 +12,16 @@ export const Title = styled.h1 `
 `;
 
 function App() {
-  const [numCards, setNumCards] = useState(8); //make way to set later
+  const [numCards, setNumCards] = useState(8);
+  const [cardSet, setCardSet] = useState("colorSet");
 
   const [cols, rows] = CalculateCols(numCards);
 
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home numCards={numCards} setNumCards={setNumCards}/>} />
-        <Route path="/game/:numCards" element={<Game numCards={numCards} rows={rows} cols={cols}/>} />
+        <Route path="/" element={<Home numCards={numCards} setNumCards={setNumCards} cardSet={cardSet} setCardSet={setCardSet}/>} />
+        <Route path="/game/:numCards/:cardSet" element={<Game rows={rows} cols={cols}/>} />
       </Routes>
     </BrowserRouter>
   )

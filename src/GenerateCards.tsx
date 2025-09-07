@@ -1,7 +1,11 @@
+import { useParams } from "react-router-dom";
+
 export const GenerateCards = (sets: number) => {
     const cardArray: string[] = [];
 
-    const set = "/colorSet"; //add way to change later
+    const { cardSet } = useParams();
+
+    const set = `/${cardSet}`;
 
     for(let i=1; i<=sets; i++) {
         cardArray.push(set + "/card" + i.toString() + ".png");
