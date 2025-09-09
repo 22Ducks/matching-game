@@ -1,17 +1,13 @@
-import { useState, useEffect, createContext } from "react";
+import { useState, createContext } from "react";
 import { useParams } from "react-router-dom";
 import { Title } from "./App";
 import { Board } from "./Board";
-import { styled } from "styled-components";
-
-type GameProps = {
-    rows: number;
-    cols: number;
-};
+import { CalculateCols } from "./CalculateCols";
+import { Timer } from "./Timer";
 
 type TimeContextType = {
   timer: number;
-  setTimerVal: (timer: number) => void;
+  setTimerVal: React.Dispatch<React.SetStateAction<number>>
   timerState: boolean;
   setTimerState: (timerState: boolean) => void;
 }
@@ -24,17 +20,14 @@ const initialTimeContext: TimeContextType = {
 
 export const TimeContext = createContext<TimeContextType>(initialTimeContext);
 
-const TimerStyle = styled.h4 `
-  margin-top: 5px;
-  margin-bottom: 5px;
-`;
-
-export function Game({ rows, cols }: GameProps) {
+export function Game() {
   const [timer, setTimerVal] = useState(0);
   const [timerState, setTimerState] = useState(true);
 
   const { numCards } = useParams();
   const numOfCards = Number(numCards) || 8;
+  
+  const [cols, rows] = CalculateCols(numOfCards);
 
   const timerValues = {
     timer,
@@ -43,26 +36,12 @@ export function Game({ rows, cols }: GameProps) {
     setTimerState
   };
 
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      if(timerState){
-        setTimerVal(prevTimer => prevTimer+1);
-      }
-    }, 1000);
-
-    return () => {
-      clearInterval(intervalId);
-    };
-  }, [timerState]);
-
   return (
     <TimeContext.Provider value={timerValues}>
-      <div>
-        <Title>Memory Match!</Title>
-      </div>
+      <Title>Memory Match!</Title>
 
       <hr />
-      <TimerStyle>{timer}</TimerStyle>
+        <Timer />
       <hr />
 
       <Board numCards={numOfCards} rows={rows} cols={cols}/>

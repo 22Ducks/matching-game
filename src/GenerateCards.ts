@@ -13,9 +13,9 @@ export const GenerateCards = (sets: number) => {
     }
 
     let shuffled = cardArray
-    .map(value => ({ value, sort: Math.random() })) //put in object with random keys
-    .sort((a, b) => a.sort - b.sort) //put them in order of their random keys
-    .map(({ value }) => value) //remove values from object into array form
+        .map(value => ({ value, sort: Math.random() })) //put in object with random keys
+        .sort((a, b) => a.sort - b.sort) //put them in order of their random keys
+        .map(({ value }) => value) //remove values from object into array form
 
     return shuffled;
 }

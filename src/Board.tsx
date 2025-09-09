@@ -59,31 +59,32 @@ export const Board = ({numCards, rows, cols}: Props) => {
     }
     
     const flipHandler = (idx: number) => {
-        if((currentPair.current[1] < 0) && flippedArray[idx] === false) {
-            const newArray = [...flippedArray];
-            newArray.splice(idx, 1, true);
-            setFlippedArray(newArray);
-            if(currentPair.current[0] < 0) {
-                currentPair.current[0] = idx;
-                return;
-            }
-            currentPair.current[1] = idx;
-            if(cardArray[currentPair.current[0]] === cardArray[currentPair.current[1]]) {
-                currentPair.current = [-1, -1];
-                return;
-            }
-            timeoutId.current = setTimeout(() => {
-                const captureCurrent = currentPair.current;
-                setFlippedArray(currArray => {
-                    const newArray = [...currArray];
-                    newArray[captureCurrent[0]] = false;
-                    newArray[captureCurrent[1]] = false;
-                    return newArray;
-                });
-
-                currentPair.current = [-1, -1];
-            }, 1000);
+        if (currentPair.current[1] >=0 || flippedArray[idx] === true) {
+            return;
         }
+        const newArray = [...flippedArray];
+        newArray.splice(idx, 1, true);
+        setFlippedArray(newArray);
+        if(currentPair.current[0] < 0) {
+            currentPair.current[0] = idx;
+            return;
+        }
+        currentPair.current[1] = idx;
+        if(cardArray[currentPair.current[0]] === cardArray[currentPair.current[1]]) {
+            currentPair.current = [-1, -1];
+            return;
+        }
+        timeoutId.current = setTimeout(() => {
+            const captureCurrent = currentPair.current;
+            setFlippedArray(currArray => {
+                const newArray = [...currArray];
+                newArray[captureCurrent[0]] = false;
+                newArray[captureCurrent[1]] = false;
+                return newArray;
+            });
+
+            currentPair.current = [-1, -1];
+        }, 1000);
     }
 
     return (

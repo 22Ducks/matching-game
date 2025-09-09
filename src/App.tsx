@@ -1,8 +1,7 @@
 import { styled } from 'styled-components';
 import './App.css'
-import { CalculateCols } from './CalculateCols.tsx';
-import { useState, type ChangeEvent } from 'react';
-import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Game } from './Game.tsx';
 import { Home } from './Home.tsx';
 
@@ -15,13 +14,11 @@ function App() {
   const [numCards, setNumCards] = useState(8);
   const [cardSet, setCardSet] = useState("colorSet");
 
-  const [cols, rows] = CalculateCols(numCards);
-
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home numCards={numCards} setNumCards={setNumCards} cardSet={cardSet} setCardSet={setCardSet}/>} />
-        <Route path="/game/:numCards/:cardSet" element={<Game rows={rows} cols={cols}/>} />
+        <Route path="/game/:numCards/:cardSet" element={<Game/>} />
       </Routes>
     </BrowserRouter>
   )

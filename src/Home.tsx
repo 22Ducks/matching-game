@@ -4,10 +4,15 @@ import { useNavigate } from "react-router-dom";
 import { Title } from "./App";
 
 type HomeProps = {
-    numCards: number;
-    setNumCards: (numCards: number) => void;
-    cardSet: string;
-    setCardSet: (cardSet: string) => void;
+  numCards: number;
+  setNumCards: (numCards: number) => void;
+  cardSet: string;
+  setCardSet: (cardSet: string) => void;
+};
+
+const setList = {
+  "Color Set": "colorSet",
+  "Deltarune Set": "deltaSet"
 };
 
 export function Home({ numCards, setNumCards, cardSet, setCardSet }: HomeProps) {
@@ -24,11 +29,6 @@ export function Home({ numCards, setNumCards, cardSet, setCardSet }: HomeProps) 
   const handleSetChange = (e: ChangeEvent<HTMLSelectElement>) => {
     setCardSet(e.target.value);
   }
-
-  const setList = {
-    "Color Set": "colorSet",
-    "Deltarune Set": "deltaSet"
-  };
 
   return (
     <>
@@ -48,8 +48,8 @@ export function Home({ numCards, setNumCards, cardSet, setCardSet }: HomeProps) 
       <div>
         <label htmlFor="set-cards">Select card set:</label>
         <select id="set-cards" value={cardSet} onChange={handleSetChange}>
-        {Object.entries(setList).map(([setName, setValue]) =>
-          <option value={setValue}>{setName}</option>  
+        {Object.entries(setList).map(([cardSetName, cardSetValue]) =>
+          <option value={cardSetValue} key={cardSetValue}>{cardSetName}</option>  
         )}
         </select>
       </div>
