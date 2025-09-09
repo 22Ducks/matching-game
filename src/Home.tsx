@@ -1,7 +1,6 @@
 import { Button } from "@mui/material";
 import type { ChangeEvent } from "react";
 import { useNavigate } from "react-router-dom";
-import { Title } from "./App";
 
 type HomeProps = {
   numCards: number;
@@ -32,10 +31,6 @@ export function Home({ numCards, setNumCards, cardSet, setCardSet }: HomeProps) 
 
   return (
     <>
-      <div>
-        <Title>Memory Match!</Title>
-      </div>
-
       <div>
         <label htmlFor="num-cards">Select number of cards:</label>
         <select id="num-cards" value={numCards} onChange={handleChange}>

@@ -16,6 +16,7 @@ function App() {
 
   return (
     <BrowserRouter>
+      <Title>Memory Match!</Title>
       <Routes>
         <Route path="/" element={<Home numCards={numCards} setNumCards={setNumCards} cardSet={cardSet} setCardSet={setCardSet}/>} />
         <Route path="/game/:numCards/:cardSet" element={<Game/>} />

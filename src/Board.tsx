@@ -1,9 +1,10 @@
 import styled from 'styled-components'
 import { Card } from './Card';
-import { GenerateCards } from './GenerateCards';
+import { generateCards } from './generateCards';
 import { useContext, useEffect, useRef, useState } from 'react';
 import { VictoryModal } from './VictoryModal';
 import { TimeContext } from './Game';
+import { useParams } from 'react-router-dom';
 
 
 type Props = {
@@ -29,8 +30,10 @@ const BoardContainer = styled.div<BoardContainerProps> `
 `;
 
 export const Board = ({numCards, rows, cols}: Props) => {
+    const { cardSet } = useParams();
+    const usedCardSet = cardSet || "colorSet";
     const [flippedArray, setFlippedArray] = useState<boolean[]>(new Array(numCards).fill(false));
-    const [cardArray, setCardArray] = useState<string[]>(GenerateCards(numCards/2));
+    const [cardArray, setCardArray] = useState<string[]>(generateCards(numCards/2, usedCardSet));
 
     const currentPair = useRef([-1, -1]);
     const timeoutId = useRef<number>(undefined);
@@ -52,7 +55,7 @@ export const Board = ({numCards, rows, cols}: Props) => {
     }, [flippedArray])
 
     const reset = () => {
-        setCardArray(GenerateCards(numCards/2));
+        setCardArray(generateCards(numCards/2, usedCardSet));
         setFlippedArray(new Array(numCards).fill(false));
         setTimerVal(0);
         setTimerState(true);

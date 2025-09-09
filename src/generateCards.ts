@@ -1,9 +1,5 @@
-import { useParams } from "react-router-dom";
-
-export const GenerateCards = (sets: number) => {
+export const generateCards = (sets: number, cardSet: string) => {
     const cardArray: string[] = [];
-
-    const { cardSet } = useParams();
 
     const set = `/${cardSet}`;
 

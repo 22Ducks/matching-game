@@ -1,9 +1,9 @@
 import { useState, createContext } from "react";
 import { useParams } from "react-router-dom";
-import { Title } from "./App";
 import { Board } from "./Board";
 import { CalculateCols } from "./CalculateCols";
 import { Timer } from "./Timer";
+import { validateNumCards } from "./validateNumCards";
 
 type TimeContextType = {
   timer: number;
@@ -25,7 +25,7 @@ export function Game() {
   const [timerState, setTimerState] = useState(true);
 
   const { numCards } = useParams();
-  const numOfCards = Number(numCards) || 8;
+  const numOfCards = validateNumCards(numCards);
   
   const [cols, rows] = CalculateCols(numOfCards);
 
@@ -38,10 +38,9 @@ export function Game() {
 
   return (
     <TimeContext.Provider value={timerValues}>
-      <Title>Memory Match!</Title>
-
+      
       <hr />
-        <Timer />
+      <Timer />
       <hr />
 
       <Board numCards={numOfCards} rows={rows} cols={cols}/>

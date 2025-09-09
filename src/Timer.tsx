@@ -1,6 +1,7 @@
 import { useContext, useEffect } from "react";
 import { TimeContext } from "./Game";
 import { styled } from "styled-components";
+import { formatTime } from "./formatTime";
 
 const TimerStyle = styled.h4 `
   margin-top: 5px;
@@ -9,6 +10,9 @@ const TimerStyle = styled.h4 `
 
 export const Timer = () => {
     const {timer, setTimerVal, timerState} = useContext(TimeContext);
+
+    const [mins, secs] = formatTime(timer);
+    const clock = String(mins) + ":" + String(secs).padStart(2, "0");
 
     useEffect(() => {
         const intervalId = setInterval(() => {
@@ -23,6 +27,6 @@ export const Timer = () => {
       }, [timerState]);
 
       return (
-        <TimerStyle>{timer}</TimerStyle>
+        <TimerStyle>{clock}</TimerStyle>
       );
 }
