@@ -5,5 +5,9 @@ export const validateNumCards = (numCards: string | undefined) => {
         return 8;
     }
 
+    if(numberOfCards > 16) {
+        return 16;
+    }
+
     return numberOfCards + numberOfCards%2;
 }

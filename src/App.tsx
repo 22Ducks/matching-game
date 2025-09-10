@@ -5,7 +5,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Game } from './Game.tsx';
 import { Home } from './Home.tsx';
 
-export const Title = styled.h1 `
+const Title = styled.h1 `
   margin-top: 0;
   margin-bottom: 0;
 `;
