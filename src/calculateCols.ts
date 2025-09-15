@@ -1,4 +1,4 @@
-export const CalculateCols = (num: number) => {
+export const calculateCols = (num: number) => {
   let c=Math.ceil(Math.sqrt(num));
   while(num%c !== 0) {
     c--;
