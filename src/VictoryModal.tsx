@@ -36,7 +36,7 @@ export const VictoryModal = ({open, reset}: Props) => {
     };
 
     return (
-        <Modal open={open}>
+        <Modal open={open} data-testid="modal">
             <Box sx={modalStyle}>
                 <ModalContent>
                     <h2>VICTORY!</h2>
