@@ -40,8 +40,8 @@ export const VictoryModal = ({open, reset}: Props) => {
             <Box sx={modalStyle}>
                 <ModalContent>
                     <h2>VICTORY!</h2>
-                    <Button onClick={reset}>Play Again?</Button>
-                    <Button onClick={handleRedirect}>Home</Button>
+                    <Button onClick={reset} data-testid="reset">Play Again?</Button>
+                    <Button onClick={handleRedirect} data-testid="home">Home</Button>
                 </ModalContent>
             </Box>
         </Modal>

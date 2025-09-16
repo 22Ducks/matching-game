@@ -11,8 +11,7 @@ const TimerStyle = styled.h4 `
 export const Timer = () => {
     const {timer, setTimerVal, timerState} = useContext(TimeContext);
 
-    const [mins, secs] = formatTime(timer);
-    const clock = String(mins) + ":" + String(secs).padStart(2, "0");
+    const clock = formatTime(timer);
 
     useEffect(() => {
         const intervalId = setInterval(() => {
