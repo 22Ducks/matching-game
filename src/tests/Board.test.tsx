@@ -2,9 +2,11 @@ import { describe, expect, it, vi } from "vitest"
 import { Board } from "../Board"
 import { act, fireEvent, render } from "@testing-library/react";
 import * as GenerateCards from "../generateCards";
+import * as ReactRouterDom from "react-router-dom";
 
-vi.mock("../VictoryModal", () => ({
-    VictoryModal: () => <></>
+vi.mock("react-router-dom", () => ({
+    useNavigate: vi.fn(),
+    useParams: () => ({"cardSet": "colorSet"})
 }));
 
 describe("Board", () => {
@@ -16,6 +18,15 @@ describe("Board", () => {
     it("renders the correct number of cards", () => {
         const { getAllByTestId } = render(<Board numCards={2} rows={1} cols={2}/>);
         expect( getAllByTestId("cardImage") ).toHaveLength(2);
+    });
+
+    it("brings up modal when all cards flipped", () => {
+        const { getAllByTestId } = render(<Board numCards={2} rows={1} cols={2}/>);
+        const card1 = getAllByTestId("cardImage")[0];
+        const card2 = getAllByTestId("cardImage")[1];
+        fireEvent.click(card1);
+        fireEvent.click(card2);
+        expect(getAllByTestId("modal")).not.toBeNull();
     });
 
     describe("flipHandler", () => {
@@ -37,7 +48,7 @@ describe("Board", () => {
             fireEvent.click(card2);
             expect(card1).toHaveAttribute("src", "steve");
             expect(card2).toHaveAttribute("src", "alex");
-            act(() => {vi.runAllTimers()});
+            act(() => {vi.advanceTimersByTime(2000)});
             expect(card1).toHaveAttribute("src", "/card back red.png");
             expect(card2).toHaveAttribute("src", "/card back red.png");
         });

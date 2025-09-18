@@ -92,7 +92,7 @@ export const Board = ({numCards, rows, cols}: Props) => {
 
     return (
         <>
-            <VictoryModal open={flippedArray.every((value) => value)} reset={reset}/>
+            <VictoryModal open={flippedArray.every((value) => value)} reset={reset} />
             <BoardContainer cols={cols} data-testid="board">
                 {
                     cardArray.map((card, index) => 
