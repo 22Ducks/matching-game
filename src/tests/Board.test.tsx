@@ -2,7 +2,6 @@ import { describe, expect, it, vi } from "vitest"
 import { Board } from "../Board"
 import { act, fireEvent, render } from "@testing-library/react";
 import * as GenerateCards from "../generateCards";
-import * as ReactRouterDom from "react-router-dom";
 
 vi.mock("react-router-dom", () => ({
     useNavigate: vi.fn(),
