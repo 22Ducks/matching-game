@@ -1,7 +1,7 @@
 import { useState, createContext } from "react";
 import { useParams } from "react-router-dom";
 import { Board } from "./Board";
-import { CalculateCols } from "./CalculateCols";
+import { calculateCols } from "./calculateCols";
 import { Timer } from "./Timer";
 import { validateNumCards } from "./validateNumCards";
 
@@ -27,7 +27,7 @@ export function Game() {
   const { numCards } = useParams();
   const numOfCards = validateNumCards(numCards);
   
-  const [cols, rows] = CalculateCols(numOfCards);
+  const [cols, rows] = calculateCols(numOfCards);
 
   const timerValues = {
     timer,

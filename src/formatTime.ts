@@ -1,3 +1,5 @@
 export const formatTime = (num: number) => {
-    return [Math.floor(num/60), num%60];
+    const clock = String(Math.floor(num/60)) + ":" + String(num%60).padStart(2, "0");
+
+    return clock;
 }

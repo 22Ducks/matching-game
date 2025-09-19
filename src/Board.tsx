@@ -92,8 +92,8 @@ export const Board = ({numCards, rows, cols}: Props) => {
 
     return (
         <>
-            <VictoryModal open={flippedArray.every((value) => value)} reset={reset}/>
-            <BoardContainer cols={cols}>
+            <VictoryModal open={flippedArray.every((value) => value)} reset={reset} />
+            <BoardContainer cols={cols} data-testid="board">
                 {
                     cardArray.map((card, index) => 
                         <Card key={index} rows={rows} cols={cols} flipped={flippedArray[index]} card={card} flipCard={() => flipHandler(index)}/>
