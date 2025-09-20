@@ -48,7 +48,7 @@ export function Home({ numCards, setNumCards, cardSet, setCardSet }: HomeProps) 
   const previewCards: string[] = [];
 
   for(let i=1; i<=8; i++) {
-    previewCards.push("/" + cardSet + "/card" + i.toString() + ".png");
+    previewCards.push(`${import.meta.env.BASE_URL}/${cardSet}/card${i.toString()}.png`);
   }
 
   return (
