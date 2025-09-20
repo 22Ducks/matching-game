@@ -1,7 +1,7 @@
 export const generateCards = (sets: number, cardSet: string) => {
     const cardArray: string[] = [];
 
-    const set = `/${cardSet}`;
+    const set = `${import.meta.env.BASE_URL}/${cardSet}`;
 
     for(let i=1; i<=sets; i++) {
         cardArray.push(set + "/card" + i.toString() + ".png");

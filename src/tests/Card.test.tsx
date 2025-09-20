@@ -20,6 +20,6 @@ describe("Card", () => {
         const { getByTestId, rerender } = render(<Card rows={1} cols={1} flipped card="Leg Sweep" flipCard={vi.fn()}/>);
         expect(getByTestId("cardImage")).toHaveAttribute("src", "Leg Sweep");
         rerender(<Card rows={1} cols={1} flipped={false} card="Leg Sweep" flipCard={vi.fn()}/>)
-        expect(getByTestId("cardImage")).toHaveAttribute("src", "/card back red.png");
+        expect(getByTestId("cardImage")).toHaveAttribute("src", "/matching-game//card back red.png");
     });
 });

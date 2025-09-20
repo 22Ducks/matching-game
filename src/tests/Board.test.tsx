@@ -32,9 +32,9 @@ describe("Board", () => {
         it("flips the card clicked", () => {
             const { getAllByTestId } = render(<Board numCards={2} rows={1} cols={2}/>);
             const card1 = getAllByTestId("cardImage")[0];
-            expect(card1).toHaveAttribute("src", "/card back red.png");
+            expect(card1).toHaveAttribute("src", "/matching-game//card back red.png");
             fireEvent.click(card1);
-            expect(card1).toHaveAttribute("src", "/colorSet/card1.png");
+            expect(card1).toHaveAttribute("src", "/matching-game//colorSet/card1.png");
         });
 
         it("properly handles non-match", () => {
@@ -48,8 +48,8 @@ describe("Board", () => {
             expect(card1).toHaveAttribute("src", "steve");
             expect(card2).toHaveAttribute("src", "alex");
             act(() => {vi.advanceTimersByTime(2000)});
-            expect(card1).toHaveAttribute("src", "/card back red.png");
-            expect(card2).toHaveAttribute("src", "/card back red.png");
+            expect(card1).toHaveAttribute("src", "/matching-game//card back red.png");
+            expect(card2).toHaveAttribute("src", "/matching-game//card back red.png");
         });
 
         it("properly handles non-match", () => {

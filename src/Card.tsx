@@ -24,7 +24,7 @@ const CardImage = styled.img `
 `;
 
 export const Card = ({rows, cols, flipped, card, flipCard}: Props) => {
-    const back = "/card back red.png";
+    const back = `${import.meta.env.BASE_URL}/card back red.png`;
     return (
         <CardDiv data-testid="card" rows={rows} cols={cols} onClick={flipCard}>
             <CardImage data-testid="cardImage" src={flipped ? card : back}/>
